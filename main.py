@@ -1,12 +1,14 @@
 # FELICIA UCDPA Project
 # Import pandas as pd
 import pandas as pd
+import numpy as np
 
 # Import the data from CSV: VaccinationItaly
 df = pd.read_csv("italian_vaccination.csv")
 print(df.describe())
 print(df.info)
 print(type(df))
+df = pd.read_csv("italian_vaccination.csv",sep=',', header = None, skiprows=131527, chunksize=131528)
 
 # understand data of CSV - dati puliti e completi devo tagliarne qualcuno - uso dei dizionari
 VaccinationItaly = pd.read_csv("italian_vaccination.csv")
@@ -28,8 +30,6 @@ response = requests.get(url)
 response.raise_for_status()
 soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
-# Import main library
-import pandas as pd
 # Just a workaround to globally set chart sizes
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = [35, 15]
@@ -83,3 +83,11 @@ print(cleaned_data.isnull().sum())
 
 cleaned_data = VaccinationItaly.fillna(method='bfill')
 cleaned_data = VaccinationItaly.fillna(method='ffill').fillna(method='bfill')
+
+import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5, 6, 7, 8]
+y = [0.1, 0.2, 0.5, 0.6, 0.8, 0.8, 0.9, 1.3]
+
+plt.plot(x, y)
+plt.show()
